@@ -37,13 +37,9 @@ Dependencies:
 If you have everything ready to go, follow these steps:
 
     cd $HOME
-    
     git clone https://github.com/MJorink/hypr-dotfiles
-    
     cd hypr-dotfiles
-    
     cp -r .config $HOME/
-    
     reboot
     
     
