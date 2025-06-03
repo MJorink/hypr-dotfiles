@@ -12,10 +12,15 @@ Dependencies:
 - Git
 
 Steps:
+
 git clone https://github.com/MJorink/hypr-dotfiles
+
 cd hypr-dotfiles
+
 ./install.sh
+
 (actual script is coming soon)
+
 
 ------------------------------------------------------------
 
@@ -29,10 +34,16 @@ Make sure you have all dependencies installed:
 - (Dependency list here soon)
 
 If you have everything ready to go, follow these steps:
+
     cd $HOME
+    
     git clone https://github.com/MJorink/hypr-dotfiles
+    
     cd hypr-dotfiles
+    
     cp -r .config $HOME/
+    
     reboot
+    
     
 ------------------------------------------------------------
