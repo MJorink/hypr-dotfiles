@@ -13,11 +13,11 @@ Dependencies:
 
 Steps:
 
-git clone https://github.com/MJorink/hypr-dotfiles
+        git clone https://github.com/MJorink/hypr-dotfiles
 
-cd hypr-dotfiles
+        cd hypr-dotfiles
 
-./install.sh
+        ./install.sh
 
 (actual script is coming soon)
 
