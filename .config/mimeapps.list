@@ -1,0 +1,11 @@
+[Default Applications]
+inode/directory=thunar.desktop
+application/x-wayland-gnome-saved-search=thunar.desktop
+text/x-csrc=userapp-kitty micro-6V6A72.desktop
+text/plain=userapp-kitty micro-6V6A72.desktop
+application/octet-stream=userapp-micro-E7ZF72.desktop
+
+[Added Associations]
+text/x-csrc=userapp-micro-E7ZF72.desktop;userapp-kitty micro-6V6A72.desktop;
+text/plain=userapp-kitty micro-6V6A72.desktop;
+application/octet-stream=userapp-micro-E7ZF72.desktop;
