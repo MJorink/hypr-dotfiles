@@ -13,10 +13,9 @@ Dependencies:
 
 Steps:
 
-    git clone https://github.com/MJorink/hypr-dotfiles
-
-    cd hypr-dotfiles
-
+    git clone --depth=1 https://github.com/JaKooLit/Arch-Hyprland.git ~/Arch-Hyprland
+    cd ~/Arch-Hyprland
+    chmod +x install.sh
     ./install.sh
 
 (actual script is coming soon)
