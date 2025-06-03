@@ -7,6 +7,8 @@ Check him out here: https://github.com/JaKooLit
 ------------------------------------------------------------
 Installation:
 
+For arch / arch-based distros use this guide, for any other distro use a script from JaKooLit, then after you installed everything from that script, follow the Manual Installation part on this page.
+
 Dependencies: 
 - Archinstall minimum (or similar)
 - Git
@@ -23,11 +25,12 @@ Steps:
 ------------------------------------------------------------
 Manual Installation:
 
-Make sure you have all dependencies installed:
+Dependencies:
 
-- Arch installed (at least minimum)
+- Hyprland
 - Git
-- (Dependency list here soon)
+- (Note that you need a bunch of packages to get the intended experience for these dotfiles, scripted install is recommended) 
+
 
 If you have everything ready to go, follow these steps:
 
