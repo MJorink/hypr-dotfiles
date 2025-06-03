@@ -7,7 +7,9 @@ Check him out here: https://github.com/JaKooLit
 ------------------------------------------------------------
 Installation:
 
-For arch / arch-based distros use this guide, for any other distro use a script from JaKooLit, then after you installed everything from that script, follow the Manual Installation part on this page.
+For arch / arch-based distros just use this guide. 
+
+For any other distro, use the script for your distro from JaKooLit, then after you are done with that script, follow the Manual Installation part on this page.
 
 Dependencies: 
 - Archinstall minimum (or similar)
