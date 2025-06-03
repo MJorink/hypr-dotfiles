@@ -21,6 +21,7 @@ cd hypr-dotfiles
 
 ------------------------------------------------------------
 Manual Installation:
+
 Make sure you have all dependencies installed:
 
 - Arch installed (at least minimum)
