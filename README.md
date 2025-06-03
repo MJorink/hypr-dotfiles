@@ -6,6 +6,7 @@ Check him out here: https://github.com/JaKooLit
 
 ------------------------------------------------------------
 Installation:
+
 Dependencies: 
 - Archinstall minimum (or similar)
 - Git
