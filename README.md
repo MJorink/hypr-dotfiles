@@ -15,6 +15,7 @@ git clone https://github.com/MJorink/hypr-dotfiles
 cd hypr-dotfiles
 ./install.sh
 (actual script is coming soon)
+
 ------------------------------------------------------------
 
 ------------------------------------------------------------
@@ -31,4 +32,5 @@ If you have everything ready to go, follow these steps:
     cd hypr-dotfiles
     cp -r .config $HOME/
     reboot
+    
 ------------------------------------------------------------
