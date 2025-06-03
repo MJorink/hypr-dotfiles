@@ -37,6 +37,7 @@ Dependencies:
 - (Note that you need a bunch of packages to get the intended experience for these dotfiles, scripted install is recommended) 
 
 If you came here after using a JaKooLit script, continue here:
+
 If you have everything ready to go, follow these steps:
 
     cd $HOME
