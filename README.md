@@ -6,7 +6,7 @@ Check him out here: https://github.com/JaKooLit
 
 ------------------------------------------------------------
 Installation:
-Dependency's: 
+Dependencies: 
 - Archinstall minimum (or similar)
 - Git
 
@@ -20,7 +20,7 @@ cd hypr-dotfiles
 
 ------------------------------------------------------------
 Manual Installation:
-Make sure you have all dependency's installed:
+Make sure you have all dependencies installed:
 
 - Arch installed (at least minimum)
 - Git
