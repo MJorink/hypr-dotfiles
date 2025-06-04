@@ -1,6 +1,7 @@
 #!/bin/bash
 
 clear
+git lfs install
 wallpaper=$HOME/.config/hypr/wallpaper_effects/.wallpaper_current
 waybar_style="$HOME/.config/waybar/style/[Wallust] Colored.css"
 waybar_config="$HOME/.config/waybar/configs/[TOP] 0-Ja-0"
@@ -655,6 +656,7 @@ for DIR_NAME in $DIR; do
   
   # Copy the new config
   if [ -d ".config/$DIR_NAME" ]; then
+  git lfs install
     cp -r ".config/$DIR_NAME/" "$HOME/.config/$DIR_NAME" 2>&1 | tee -a "$LOG"
     cp -r ".themes/" "$HOME/"
     cp -r ".icons/" "$HOME/"
