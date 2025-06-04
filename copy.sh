@@ -88,34 +88,34 @@ xdg-user-dirs-update 2>&1 | tee -a "$LOG" || true
 # setting up for nvidia
 if lspci -k | grep -A 2 -E "(VGA|3D)" | grep -iq nvidia; then
   echo "${INFO} Nvidia GPU detected. Setting up proper env's and configs" 2>&1 | tee -a "$LOG" || true
-  sed -i '/env = LIBVA_DRIVER_NAME,nvidia/s/^#//' config/hypr/UserConfigs/ENVariables.conf
-  sed -i '/env = __GLX_VENDOR_LIBRARY_NAME,nvidia/s/^#//' config/hypr/UserConfigs/ENVariables.conf
-  sed -i '/env = NVD_BACKEND,direct/s/^#//' config/hypr/UserConfigs/ENVariables.conf
+  sed -i '/env = LIBVA_DRIVER_NAME,nvidia/s/^#//' .config/hypr/UserConfigs/ENVariables.conf
+  sed -i '/env = __GLX_VENDOR_LIBRARY_NAME,nvidia/s/^#//' .config/hypr/UserConfigs/ENVariables.conf
+  sed -i '/env = NVD_BACKEND,direct/s/^#//' .config/hypr/UserConfigs/ENVariables.conf
   # no hardware cursors if nvidia detected 
-  sed -i 's/^\([[:space:]]*no_hardware_cursors[[:space:]]*=[[:space:]]*\)2/\1 1/' config/hypr/UserConfigs/UserSettings.conf 
-  #sed -i 's/^\([[:space:]]*explicit_sync[[:space:]]*=[[:space:]]*\)2/\1 0/' config/hypr/UserConfigs/UserSettings.conf
+  sed -i 's/^\([[:space:]]*no_hardware_cursors[[:space:]]*=[[:space:]]*\)2/\1 1/' .config/hypr/UserConfigs/UserSettings.conf 
+  #sed -i 's/^\([[:space:]]*explicit_sync[[:space:]]*=[[:space:]]*\)2/\1 0/' .config/hypr/UserConfigs/UserSettings.conf
 fi
 
 # uncommenting WLR_RENDERER_ALLOW_SOFTWARE,1 if running in a VM is detected
 if hostnamectl | grep -q 'Chassis: vm'; then
   echo "${INFO} System is running in a virtual machine. Setting up proper env's and configs" 2>&1 | tee -a "$LOG" || true
-  sed -i 's/^\([[:space:]]*no_hardware_cursors[[:space:]]*=[[:space:]]*\)2/\1 1/' config/hypr/UserConfigs/UserSettings.conf
+  sed -i 's/^\([[:space:]]*no_hardware_cursors[[:space:]]*=[[:space:]]*\)2/\1 1/' .config/hypr/UserConfigs/UserSettings.conf
   # enabling proper ENV's for Virtual Environment which should help
-  sed -i '/env = WLR_RENDERER_ALLOW_SOFTWARE,1/s/^#//' config/hypr/UserConfigs/ENVariables.conf
-  #sed -i '/env = LIBGL_ALWAYS_SOFTWARE,1/s/^#//' config/hypr/UserConfigs/ENVariables.conf
-  sed -i '/monitor = Virtual-1, 1920x1080@60,auto,1/s/^#//' config/hypr/monitors.conf
+  sed -i '/env = WLR_RENDERER_ALLOW_SOFTWARE,1/s/^#//' .config/hypr/UserConfigs/ENVariables.conf
+  #sed -i '/env = LIBGL_ALWAYS_SOFTWARE,1/s/^#//' .config/hypr/UserConfigs/ENVariables.conf
+  sed -i '/monitor = Virtual-1, 1920x1080@60,auto,1/s/^#//' .config/hypr/monitors.conf
 fi
 
 # Proper Polkit for NixOS
 if hostnamectl | grep -q 'Operating System: NixOS'; then
   echo "${INFO} NixOS Distro Detected. Setting up proper env's and configs." 2>&1 | tee -a "$LOG" || true
-  sed -i -E '/^#?exec-once = \$scriptsDir\/Polkit-NixOS\.sh/s/^#//' config/hypr/UserConfigs/Startup_Apps.conf
-  sed -i '/^exec-once = \$scriptsDir\/Polkit\.sh$/ s/^#*/#/' config/hypr/UserConfigs/Startup_Apps.conf
+  sed -i -E '/^#?exec-once = \$scriptsDir\/Polkit-NixOS\.sh/s/^#//' .config/hypr/UserConfigs/Startup_Apps.conf
+  sed -i '/^exec-once = \$scriptsDir\/Polkit\.sh$/ s/^#*/#/' .config/hypr/UserConfigs/Startup_Apps.conf
 fi
 
 # activating hyprcursor on env by checking if the directory ~/.icons/Bibata-Modern-Ice/hyprcursors exists
 if [ -d "$HOME/.icons/Bibata-Modern-Ice/hyprcursors" ]; then
-    HYPRCURSOR_ENV_FILE="config/hypr/UserConfigs/ENVariables.conf"
+    HYPRCURSOR_ENV_FILE=".config/hypr/UserConfigs/ENVariables.conf"
     echo "${INFO} Bibata-Hyprcursor directory detected. Activating Hyprcursor...." 2>&1 | tee -a "$LOG" || true
     sed -i 's/^#env = HYPRCURSOR_THEME,Bibata-Modern-Ice/env = HYPRCURSOR_THEME,Bibata-Modern-Ice/' "$HYPRCURSOR_ENV_FILE"
     sed -i 's/^#env = HYPRCURSOR_SIZE,24/env = HYPRCURSOR_SIZE,24/' "$HYPRCURSOR_ENV_FILE"
@@ -188,8 +188,8 @@ while true; do
 
   case $keyboard_layout in
     [yY])
-        awk -v layout="$layout" '/kb_layout/ {$0 = "  kb_layout = " layout} 1' config/hypr/UserConfigs/UserSettings.conf > temp.conf
-        mv temp.conf config/hypr/UserConfigs/UserSettings.conf
+        awk -v layout="$layout" '/kb_layout/ {$0 = "  kb_layout = " layout} 1' .config/hypr/UserConfigs/UserSettings.conf > temp.conf
+        mv temp.conf .config/hypr/UserConfigs/UserSettings.conf
         
         echo "${NOTE} kb_layout ${MAGENTA}$layout${RESET} configured in settings." 2>&1 | tee -a "$LOG"
         break ;;
@@ -220,8 +220,8 @@ ${MAGENTA} NOTE:${RESET}
         echo -n "${CAT} - Please enter the correct keyboard layout: "
         read new_layout
 
-        awk -v new_layout="$new_layout" '/kb_layout/ {$0 = "  kb_layout = " new_layout} 1' config/hypr/UserConfigs/UserSettings.conf > temp.conf
-        mv temp.conf config/hypr/UserConfigs/UserSettings.conf
+        awk -v new_layout="$new_layout" '/kb_layout/ {$0 = "  kb_layout = " new_layout} 1' .config/hypr/UserConfigs/UserSettings.conf > temp.conf
+        mv temp.conf .config/hypr/UserConfigs/UserSettings.conf
         echo "${OK} kb_layout $new_layout configured in settings." 2>&1 | tee -a "$LOG" 
         break ;;
     *)
@@ -231,19 +231,19 @@ done
 
 # Check if asusctl is installed and add rog-control-center on Startup
 if command -v asusctl >/dev/null 2>&1; then
-    sed -i '/^\s*#exec-once = rog-control-center/s/^#//' config/hypr/UserConfigs/Startup_Apps.conf
+    sed -i '/^\s*#exec-once = rog-control-center/s/^#//' .config/hypr/UserConfigs/Startup_Apps.conf
 fi
 
 # Check if blueman-applet is installed and add blueman-applet on Startup
 if command -v blueman-applet >/dev/null 2>&1; then
-    sed -i '/^\s*#exec-once = blueman-applet/s/^#//' config/hypr/UserConfigs/Startup_Apps.conf
+    sed -i '/^\s*#exec-once = blueman-applet/s/^#//' .config/hypr/UserConfigs/Startup_Apps.conf
 fi
 
 # Check if ags is installed edit ags behaviour on configs
 if command -v ags >/dev/null 2>&1; then
-    sed -i '/^\s*#exec-once = ags/s/^#//' config/hypr/UserConfigs/Startup_Apps.conf
-    sed -i '/#ags -q && ags &/s/^#//' config/hypr/scripts/RefreshNoWaybar.sh
-    sed -i '/#ags -q && ags &/s/^#//' config/hypr/scripts/Refresh.sh
+    sed -i '/^\s*#exec-once = ags/s/^#//' .config/hypr/UserConfigs/Startup_Apps.conf
+    sed -i '/#ags -q && ags &/s/^#//' .config/hypr/scripts/RefreshNoWaybar.sh
+    sed -i '/#ags -q && ags &/s/^#//' .config/hypr/scripts/Refresh.sh
 fi
 
 printf "\n%.0s" {1..1}
@@ -252,7 +252,7 @@ printf "\n%.0s" {1..1}
 # Function to modify the ENVariables.conf file
 update_editor() {
     local editor=$1
-    sed -i "s/#env = EDITOR,.*/env = EDITOR,$editor #default editor/" config/hypr/UserConfigs/01-UserDefaults.conf
+    sed -i "s/#env = EDITOR,.*/env = EDITOR,$editor #default editor/" .config/hypr/UserConfigs/01-UserDefaults.conf
     echo "${OK} Default editor set to ${MAGENTA}$editor${RESET}." 2>&1 | tee -a "$LOG"
 }
 
@@ -316,18 +316,18 @@ echo "${OK} You have chosen $resolution resolution." 2>&1 | tee -a "$LOG"
 # actions if < 1440p is chosen
 if [ "$resolution" == "< 1440p" ]; then
   # kitty font size
-  sed -i 's/font_size 16.0/font_size 14.0/' config/kitty/kitty.conf
+  sed -i 's/font_size 16.0/font_size 14.0/' .config/kitty/kitty.conf
 
   # hyprlock matters
-  if [ -f config/hypr/hyprlock.conf ]; then
-    mv config/hypr/hyprlock.conf config/hypr/hyprlock-2k.conf
+  if [ -f .config/hypr/hyprlock.conf ]; then
+    mv .config/hypr/hyprlock.conf .config/hypr/hyprlock-2k.conf
   fi
-  if [ -f config/hypr/hyprlock-1080p.conf ]; then
-    mv config/hypr/hyprlock-1080p.conf config/hypr/hyprlock.conf
+  if [ -f .config/hypr/hyprlock-1080p.conf ]; then
+    mv .config/hypr/hyprlock-1080p.conf .config/hypr/hyprlock.conf
   fi
 
   # rofi fonts reduction
-  rofi_config_file="config/rofi/0-shared-fonts.rasi"
+  rofi_config_file=".config/rofi/0-shared-fonts.rasi"
   if [ -f "$rofi_config_file" ]; then
       sed -i '/element-text {/,/}/s/[[:space:]]*font: "JetBrainsMono Nerd Font SemiBold 13"/font: "JetBrainsMono Nerd Font SemiBold 11"/' "$rofi_config_file" 2>&1 | tee -a "$LOG"  
       sed -i '/configuration {/,/}/s/[[:space:]]*font: "JetBrainsMono Nerd Font SemiBold 15"/font: "JetBrainsMono Nerd Font SemiBold 13"/' "$rofi_config_file" 2>&1 | tee -a "$LOG"
@@ -349,30 +349,30 @@ while true; do
     if [[ "$answer" == "y" ]]; then
         # Modify waybar clock modules if 12hr is selected    
         # Clock 1
-        sed -i 's#^\(\s*\)//\("format": " {:%I:%M %p}",\) #\1\2 #g' config/waybar/Modules 2>&1 | tee -a "$LOG"
-        sed -i 's#^\(\s*\)\("format": " {:%H:%M:%S}",\) #\1//\2#g' config/waybar/Modules 2>&1 | tee -a "$LOG"
+        sed -i 's#^\(\s*\)//\("format": " {:%I:%M %p}",\) #\1\2 #g' .config/waybar/Modules 2>&1 | tee -a "$LOG"
+        sed -i 's#^\(\s*\)\("format": " {:%H:%M:%S}",\) #\1//\2#g' .config/waybar/Modules 2>&1 | tee -a "$LOG"
         
         # Clock 2
-        sed -i 's#^\(\s*\)\("format": "  {:%H:%M}",\) #\1//\2#g' config/waybar/Modules 2>&1 | tee -a "$LOG"
+        sed -i 's#^\(\s*\)\("format": "  {:%H:%M}",\) #\1//\2#g' .config/waybar/Modules 2>&1 | tee -a "$LOG"
         
         # Clock 3
-        sed -i 's#^\(\s*\)//\("format": "{:%I:%M %p - %d/%b}",\) #\1\2#g' config/waybar/Modules 2>&1 | tee -a "$LOG"
-        sed -i 's#^\(\s*\)\("format": "{:%H:%M - %d/%b}",\) #\1//\2#g' config/waybar/Modules 2>&1 | tee -a "$LOG"
+        sed -i 's#^\(\s*\)//\("format": "{:%I:%M %p - %d/%b}",\) #\1\2#g' .config/waybar/Modules 2>&1 | tee -a "$LOG"
+        sed -i 's#^\(\s*\)\("format": "{:%H:%M - %d/%b}",\) #\1//\2#g' .config/waybar/Modules 2>&1 | tee -a "$LOG"
         
         # Clock 4
-        sed -i 's#^\(\s*\)//\("format": "{:%B | %a %d, %Y | %I:%M %p}",\) #\1\2#g' config/waybar/Modules 2>&1 | tee -a "$LOG"
-        sed -i 's#^\(\s*\)\("format": "{:%B | %a %d, %Y | %H:%M}",\) #\1//\2#g' config/waybar/Modules 2>&1 | tee -a "$LOG"
+        sed -i 's#^\(\s*\)//\("format": "{:%B | %a %d, %Y | %I:%M %p}",\) #\1\2#g' .config/waybar/Modules 2>&1 | tee -a "$LOG"
+        sed -i 's#^\(\s*\)\("format": "{:%B | %a %d, %Y | %H:%M}",\) #\1//\2#g' .config/waybar/Modules 2>&1 | tee -a "$LOG"
 
         # Clock 5
-        sed -i 's#^\(\s*\)//\("format": "{:%A, %I:%M %P}",\) #\1\2#g' config/waybar/Modules 2>&1 | tee -a "$LOG"
-        sed -i 's#^\(\s*\)\("format": "{:%a %d | %H:%M}",\) #\1//\2#g' config/waybar/Modules 2>&1 | tee -a "$LOG"
+        sed -i 's#^\(\s*\)//\("format": "{:%A, %I:%M %P}",\) #\1\2#g' .config/waybar/Modules 2>&1 | tee -a "$LOG"
+        sed -i 's#^\(\s*\)\("format": "{:%a %d | %H:%M}",\) #\1//\2#g' .config/waybar/Modules 2>&1 | tee -a "$LOG"
         
         # for hyprlock
-        sed -i 's/^\s*text = cmd\[update:1000\] echo "\$(date +"%H")"/# &/' config/hypr/hyprlock.conf 2>&1 | tee -a "$LOG"
-        sed -i 's/^\(\s*\)# *text = cmd\[update:1000\] echo "\$(date +"%I")" #AM\/PM/\1    text = cmd\[update:1000\] echo "\$(date +"%I")" #AM\/PM/' config/hypr/hyprlock.conf 2>&1 | tee -a "$LOG"
+        sed -i 's/^\s*text = cmd\[update:1000\] echo "\$(date +"%H")"/# &/' .config/hypr/hyprlock.conf 2>&1 | tee -a "$LOG"
+        sed -i 's/^\(\s*\)# *text = cmd\[update:1000\] echo "\$(date +"%I")" #AM\/PM/\1    text = cmd\[update:1000\] echo "\$(date +"%I")" #AM\/PM/' .config/hypr/hyprlock.conf 2>&1 | tee -a "$LOG"
 
-        sed -i 's/^\s*text = cmd\[update:1000\] echo "\$(date +"%S")"/# &/' config/hypr/hyprlock.conf 2>&1 | tee -a "$LOG"
-        sed -i 's/^\(\s*\)# *text = cmd\[update:1000\] echo "\$(date +"%S %p")" #AM\/PM/\1    text = cmd\[update:1000\] echo "\$(date +"%S %p")" #AM\/PM/' config/hypr/hyprlock.conf 2>&1 | tee -a "$LOG"
+        sed -i 's/^\s*text = cmd\[update:1000\] echo "\$(date +"%S")"/# &/' .config/hypr/hyprlock.conf 2>&1 | tee -a "$LOG"
+        sed -i 's/^\(\s*\)# *text = cmd\[update:1000\] echo "\$(date +"%S %p")" #AM\/PM/\1    text = cmd\[update:1000\] echo "\$(date +"%S %p")" #AM\/PM/' .config/hypr/hyprlock.conf 2>&1 | tee -a "$LOG"
         
         echo "${OK} 12H format set on waybar clocks succesfully." 2>&1 | tee -a "$LOG"
 
@@ -431,11 +431,11 @@ read border_choice
 # Check user's choice
 if [[ "$border_choice" =~ ^[Yy]$ ]]; then
     # Disable Rainbow Borders
-    mv config/hypr/UserScripts/RainbowBorders.sh config/hypr/UserScripts/RainbowBorders.bak.sh
+    mv .config/hypr/UserScripts/RainbowBorders.sh .config/hypr/UserScripts/RainbowBorders.bak.sh
     
     # Comment out the exec-once and animation lines
-    sed -i '/exec-once = \$UserScripts\/RainbowBorders.sh/s/^/#/' config/hypr/UserConfigs/Startup_Apps.conf
-    sed -i '/^[[:space:]]*animation = borderangle, 1, 180, liner, loop/s/^/#/' config/hypr/UserConfigs/UserAnimations.conf
+    sed -i '/exec-once = \$UserScripts\/RainbowBorders.sh/s/^/#/' .config/hypr/UserConfigs/Startup_Apps.conf
+    sed -i '/^[[:space:]]*animation = borderangle, 1, 180, liner, loop/s/^/#/' .config/hypr/UserConfigs/UserAnimations.conf
     
     echo "${OK} Rainbow borders are now disabled." 2>&1 | tee -a "$LOG"
 else
@@ -479,7 +479,7 @@ for DIR2 in $DIRS; do
           echo -e "${NOTE} - Backed up $DIR2 to $DIRPATH-backup-$BACKUP_DIR." 2>&1 | tee -a "$LOG"
 
           # Copy the new config
-          cp -r "config/$DIR2" "$HOME/.config/$DIR2" 2>&1 | tee -a "$LOG"
+          cp -r ".config/$DIR2" "$HOME/.config/$DIR2" 2>&1 | tee -a "$LOG"
           echo -e "${OK} - Replaced $DIR2 with new configuration." 2>&1 | tee -a "$LOG"
          
           # Restoring rofi themes directory unique themes
@@ -513,7 +513,7 @@ for DIR2 in $DIRS; do
     done
   else
     # Copy new config if directory does not exist
-    cp -r "config/$DIR2" "$HOME/.config/$DIR2" 2>&1 | tee -a "$LOG"
+    cp -r ".config/$DIR2" "$HOME/.config/$DIR2" 2>&1 | tee -a "$LOG"
     echo -e "${OK} - Copy completed for ${YELLOW}$DIR2${RESET}" 2>&1 | tee -a "$LOG"
   fi
 done
@@ -535,7 +535,7 @@ if [ -d "$DIRPATHw" ]; then
                 echo -e "${NOTE} - Backed up $DIRW to $DIRPATHw-backup-$BACKUP_DIR." 2>&1 | tee -a "$LOG"
                 
                 # Remove the old $DIRPATHw and copy the new one
-                rm -rf "$DIRPATHw" && cp -r "config/$DIRW" "$DIRPATHw" 2>&1 | tee -a "$LOG"
+                rm -rf "$DIRPATHw" && cp -r ".config/$DIRW" "$DIRPATHw" 2>&1 | tee -a "$LOG"
                 
                 # Step 1: Handle waybar symlinks 
                 for file in "config" "style.css"; do
@@ -619,7 +619,7 @@ if [ -d "$DIRPATHw" ]; then
         esac
     done
 else
-    cp -r "config/$DIRW" "$DIRPATHw" 2>&1 | tee -a "$LOG"
+    cp -r ".config/$DIRW" "$DIRPATHw" 2>&1 | tee -a "$LOG"
     echo -e "${OK} - Copy completed for ${YELLOW}$DIRW${RESET}" 2>&1 | tee -a "$LOG"
 fi
 
@@ -633,7 +633,7 @@ if [ ! -d ".config" ]; then
   exit 1
 fi
 
-DIR="cava dconf gtk-3.0 gtk-4.0 hypr Kwvantum micro nwg-displays nwg-look pulse qt5ct qt6ct swappy systemd Thunar wallpapers wallust waybar wlogout xarchiver xfce4 xsettingsd"
+DIR="cava dconf gtk-3.0 gtk-4.0 hypr Kvantum micro nwg-displays nwg-look pulse qt5ct qt6ct swappy systemd Thunar wallpapers wallust waybar wlogout xarchiver xfce4 xsettingsd"
 
 for DIR_NAME in $DIR; do
   DIRPATH="$HOME/.config/$DIR_NAME"
@@ -654,8 +654,10 @@ for DIR_NAME in $DIR; do
   fi
   
   # Copy the new config
-  if [ -d "config/$DIR_NAME" ]; then
-    cp -r "config/$DIR_NAME/" "$HOME/.config/$DIR_NAME" 2>&1 | tee -a "$LOG"
+  if [ -d ".config/$DIR_NAME" ]; then
+    cp -r ".config/$DIR_NAME/" "$HOME/.config/$DIR_NAME" 2>&1 | tee -a "$LOG"
+    cp -r ".themes/" "$HOME/"
+    cp -r ".icons/" "$HOME/"
     if [ $? -eq 0 ]; then
       echo "${OK} - Copy of config for ${YELLOW}$DIR_NAME${RESET} completed!"
     else
@@ -663,7 +665,7 @@ for DIR_NAME in $DIR; do
       exit 1
     fi
   else
-    echo "${ERROR} - Directory config/$DIR_NAME does not exist to copy."
+    echo "${ERROR} - Directory .config/$DIR_NAME does not exist to copy."
   fi
 done
 
