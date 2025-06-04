@@ -48,6 +48,8 @@ If you have everything ready to go, follow these steps:
     git clone https://github.com/MJorink/hypr-dotfiles
     cd hypr-dotfiles
     cp -r .config $HOME/
+    cp -r .themes $HOME/
+    cp -r .icons $HOME/
     reboot
     
     
