@@ -1,6 +1,9 @@
 sudo echo Removing possible old files
 sudo rm -r $HOME/hypr-dotfiles-local/.config
+sudo rm -r $HOME/hypr-dotfiles-local/.themes
+sudo rm -r $HOME/hypr-dotfiles-local/.icons
 sudo rm -r $HOME/hypr-dotfiles
+
 
 echo Copying new files
 sudo cp -r $HOME/.config/Thunar $HOME/hypr-dotfiles-local/.config
@@ -23,6 +26,9 @@ sudo cp -r $HOME/.config/qt5ct $HOME/hypr-dotfiles-local/.config
 sudo cp -r $HOME/.config/qt6ct $HOME/hypr-dotfiles-local/.config
 sudo cp -r $HOME/.config/micro $HOME/hypr-dotfiles-local/.config
 sudo cp -r $HOME/.config/wallpapers $HOME/hypr-dotfiles-local/.config/wallpapers
+sudo cp -r $HOME/.themes $HOME/hypr-dotfiles-local/
+sudo cp -r $HOME/.icons $HOME/hypr-dotfiles-local/
+
 
 echo Cloning repository
 git clone https://github.com/MJorink/hypr-dotfiles.git $HOME/hypr-dotfiles
@@ -32,6 +38,9 @@ echo Setting up git
 cd $HOME/hypr-dotfiles
 git init
 sudo cp -r $HOME/hypr-dotfiles-local/.config $HOME/hypr-dotfiles/
+sudo cp -r $HOME/hypr-dotfiles-local/.themes $HOME/hypr-dotfiles/
+sudo cp -r $HOME/hypr-dotfiles-local/.icons $HOME/hypr-dotfiles/
+sudo cp -r $HOME/hypr-dotfiles-local/copy.sh $HOME/hypr-dotfiles/
 git lfs install
 git lfs track "*.gif"
 git lfs track "*.wallpaper_current"
@@ -54,13 +63,7 @@ sudo git add .gitattributes
 #^ Comment out everything else under here if you are committing here.
 
 echo Adding wallpapers
-git add .config/wallpapers/1.gif
-git add .config/wallpapers/2.gif
-git add .config/wallpapers/3.gif
-git add .config/wallpapers/4.gif
-git add .config/wallpapers/5.gif
-git add .config/wallpapers/6.gif
-git add .config/wallpapers/7.gif
+git add .config/wallpapers/*.gif
 git add .config/hypr/wallpaper_effects/.wallpaper_current
 git add .config/hypr/wallpaper_effects/.wallpaper_modified
 
@@ -85,11 +88,19 @@ sudo git add .config/waybar
 sudo git add .config/wlogout
 sudo git add .config/xfce4
 
+echo Adding copy.sh script
+sudo git add ./copy.sh
+
+echo Adding Themes/Icons
+sudo git add .themes
+sudo git add .icons
+
+echo Setting global username/email
 sudo git config --global user.name "MJorink"
 sudo git config --global user.email "maxjorink@gmail.com"
 
 echo Committing update
-sudo git commit -m  "Update Commit"
+sudo git commit -m  "Update Config"
 
 echo Pushing commit
 git push -u origin main
