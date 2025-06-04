@@ -628,12 +628,12 @@ printf "\n%.0s" {1..1}
 printf "${INFO} - Copying dotfiles ${SKY_BLUE}second${RESET} part\n"
 
 # Check if the config directory exists
-if [ ! -d "config" ]; then
-  echo "${ERROR} - The 'config' directory does not exist."
+if [ ! -d ".config" ]; then
+  echo "${ERROR} - The '.config' directory does not exist."
   exit 1
 fi
 
-DIR="btop cava hypr Kvantum qt5ct qt6ct swappy wallust wlogout"
+DIR="cava dconf gtk-3.0 gtk-4.0 hypr Kwvantum micro nwg-displays nwg-look pulse qt5ct qt6ct swappy systemd Thunar wallpapers wallust waybar wlogout xarchiver xfce4 xsettingsd"
 
 for DIR_NAME in $DIR; do
   DIRPATH="$HOME/.config/$DIR_NAME"
