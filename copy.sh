@@ -1,6 +1,7 @@
 #!/bin/bash
 
 clear
+git lfs install
 wallpaper=$HOME/.config/hypr/wallpaper_effects/.wallpaper_current
 waybar_style="$HOME/.config/waybar/style/[Wallust] Colored.css"
 waybar_config="$HOME/.config/waybar/configs/[TOP] 0-Ja-0"
