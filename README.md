@@ -14,7 +14,8 @@ For arch / arch-based distros just use this guide.
 
 For any other distro, use the script for your distro from JaKooLit, then after you are done with that script, follow the Manual Installation part on this page.
 
-Dependencies: 
+Dependencies:
+- MAKE SURE YOU HAVE THESE INSTALLED, OR CERTAIN PARTS WILL FAIL
 - archinstall minimum (or similar)
 - git
 - git-lfs
@@ -33,6 +34,7 @@ Manual Installation:
 
 Dependencies:
 
+- MAKE SURE YOU HAVE THESE INSTALLED, OR CERTAIN PARTS WILL FAIL
 - Hyprland
 - git
 - git-lfs
