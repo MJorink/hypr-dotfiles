@@ -18,4 +18,5 @@ echo -e "${GREEN}Configs updated!${NC}"
 echo -e "${GREEN}Cleaning up${NC}"
 cd $HOME
 sudo rm -r $HOME/hypr-dotfiles-update
+sudo rm -r $HOME/hypr-dotfiles
 sleep 1
