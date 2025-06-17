@@ -17,7 +17,7 @@ sudo cp -r .themes $HOME
 sudo cp -r .zshrc $HOME
 
 echo -e "${GREEN}Restoring UserKeybinds from backup${NC}"
-sudo cp -r $HOME/.config/hypr/UserConfigs-Backup/UserKeybinds.conf $HOME/.config/hypr/UserConfigs
+sudo cp -r $HOME/.config/UserConfigs-Backup/UserKeybinds.conf $HOME/.config/hypr/UserConfigs
 
 echo -e "${GREEN}Your UserKeybinds should be restored, be sure to compare all your $HOME/.config/hypr/UserConfigs files with the files in $HOME/.config/UserConfigs-Backup and make changes again if you want to.${NC}"
 
