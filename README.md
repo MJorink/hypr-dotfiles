@@ -17,3 +17,11 @@ https://github.com/MJorink/Arch-Hyprland
 NixOS:
 
 https://github.com/MJorink/NixOS-Hyprland
+
+------------------------------------------------------------
+Updating dotfiles:
+
+    git lfs install
+    git clone https://github.com/MJorink/hypr-dotfiles
+    cd hypr-dotfiles
+    ./update.sh
