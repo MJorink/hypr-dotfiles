@@ -10,13 +10,10 @@ NOTE:
 ------------------------------------------------------------
 Installation:
 
-Arch / arch-based distros:
-
-https://github.com/MJorink/Arch-Hyprland
-
-NixOS:
-
-https://github.com/MJorink/NixOS-Hyprland
+    git lfs install
+    git clone https://github.com/MJorink/hypr-dotfiles
+    cd hypr-dotfiles
+    ./install.sh    
 
 ------------------------------------------------------------
 Updating dotfiles:
