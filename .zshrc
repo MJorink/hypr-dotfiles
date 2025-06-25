@@ -23,7 +23,6 @@ alias l='ls -l'
 alias la='ls -a'
 alias lla='ls -la'
 alias lt='ls --tree'
-alias edit='micro'
 
 alias config='cd $HOME/.config'
 alias config-hypr='cd $HOME/.config/hypr'
@@ -33,6 +32,8 @@ alias config-fastfetch='cd $HOME/.config/fastfetch'
 alias config-zsh='micro $HOME/.zshrc'
 alias config-dots='micro $HOME/hypr-dotfiles-local/push-script.sh'
 
+alias edit='micro'
+alias yay='yay --noconfirm'
 
 # Set-up FZF key bindings (CTRL R for fuzzy history finder)
 source <(fzf --zsh)
